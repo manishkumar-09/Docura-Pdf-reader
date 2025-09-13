@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(helmet());
 app.use(
   cors({
-    origin: "https://docura-pdf-reader-2.onrender.com",
+    origin: "https://docura-pdf-reader.vercel.app/",
     credentials: true,
   })
 );
