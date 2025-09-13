@@ -112,10 +112,13 @@ export default function PDFReader() {
         });
       }, 200);
 
-      const res = await fetch(`http://localhost:8080/api/upload`, {
-        method: "POST",
-        body: formData,
-      });
+      const res = await fetch(
+        `https://docura-pdf-reader-2.onrender.com/api/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       clearInterval(progressInterval);
       setUploadProgress(100);
@@ -158,14 +161,17 @@ export default function PDFReader() {
     clearAlerts();
 
     try {
-      const res = await fetch(`http://localhost:8080/api/query`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: currentInput,
-          namespace,
-        }),
-      });
+      const res = await fetch(
+        `https://docura-pdf-reader-2.onrender.com/api/query`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            question: currentInput,
+            namespace,
+          }),
+        }
+      );
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
