@@ -11,6 +11,8 @@ const envSchema = z.object({
   PINECONE_ENVIRONMENT: z.string().min(1, "PINECONE_ENVIRONMENT is required"),
   PINECONE_INDEX_NAME: z.string().min(1, "PINECONE_INDEX_NAME is required"),
   PINECONE_NAMESPACE: z.string().default("my-docs"),
+  GEMINI_EMBEDDING_MODEL: z.string().default("text-embedding-004"),
+  GEMINI_EMBEDDING_DIMENSION: z.coerce.number().int().positive().default(768),
   VECTOR_EXPIRATION_DAYS: z.coerce.number().default(1),
 });
 

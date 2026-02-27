@@ -30,8 +30,9 @@ export const ingestPdf = async (pdfFiles: Express.Multer.File[]) => {
 
   //create embedding
   const embedding = new GoogleGenerativeAIEmbeddings({
-    model: "text-embedding-004",
+    model: configs.GEMINI_EMBEDDING_MODEL,
     apiKey: configs.GEMINI_API_KEY,
+    outputDimensionality: configs.GEMINI_EMBEDDING_DIMENSION,
   });
 
   //unique namespace for current upload
@@ -52,8 +53,9 @@ export const queryPdf = async (question: string, namespace: string) => {
   if (!question) throw new Error("Question is required");
 
   const embedding = new GoogleGenerativeAIEmbeddings({
-    model: "text-embedding-004",
+    model: configs.GEMINI_EMBEDDING_MODEL,
     apiKey: configs.GEMINI_API_KEY,
+    outputDimensionality: configs.GEMINI_EMBEDDING_DIMENSION,
   });
 
   const index = (await pinecone).Index(configs.PINECONE_INDEX_NAME);
