@@ -6,7 +6,9 @@ config();
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production"]).default("development"),
   PORT: z.coerce.number().default(8080),
-  GEMINI_API_KEY: z.string().min(1, "COHERE_API_KEY is required"),
+  GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
+  GEMINI_CHAT_MODEL: z.string().default("gemini-2.0-flash"),
+  GEMINI_EMBEDDING_MODEL: z.string().default("gemini-embedding-001"),
   PINECONE_API_KEY: z.string().min(1, "PINECONE_API_KEY is required"),
   PINECONE_ENVIRONMENT: z.string().min(1, "PINECONE_ENVIRONMENT is required"),
   PINECONE_INDEX_NAME: z.string().min(1, "PINECONE_INDEX_NAME is required"),

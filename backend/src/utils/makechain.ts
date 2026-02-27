@@ -43,7 +43,7 @@ export const makeChain = (retriever: BaseRetriever) => {
   //setup the gemini model
   const model = new ChatGoogleGenerativeAI({
     apiKey: configs.GEMINI_API_KEY,
-    model: "gemini-2.5-flash",
+    model: configs.GEMINI_CHAT_MODEL,
     temperature: 0.2,
   });
 
