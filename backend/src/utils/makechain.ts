@@ -1,5 +1,5 @@
 //prompt templates
-import { Document } from "langchain/document";
+import { Document } from "@langchain/core/documents";
 import { BaseRetriever } from "@langchain/core/retrievers";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
@@ -61,7 +61,7 @@ export const makeChain = (retriever: BaseRetriever) => {
 
   // chain to retrive relevant docs
   const retriveValChain = retriever.pipe(
-    RunnableLambda.from((docs: Document[]) => combineDocumentsFn(docs))
+    RunnableLambda.from((docs: Document[]) => combineDocumentsFn(docs)),
   );
 
   // Chain to generate answer based on context & history
