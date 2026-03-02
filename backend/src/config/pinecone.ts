@@ -2,7 +2,7 @@ import { Pinecone } from "@pinecone-database/pinecone";
 import { configs } from "./env";
 
 if (!configs.PINECONE_API_KEY) {
-  throw new Error("Pinecone environment or api ke is missing");
+  throw new Error("PINECONE_API_KEY is missing");
 }
 
 async function PineConeConfig() {
@@ -13,7 +13,7 @@ async function PineConeConfig() {
     return pinecone;
   } catch (err) {
     console.log("err", err);
-    throw new Error("Failed to intialize pinecone client");
+    throw new Error("Failed to initialize Pinecone client");
   }
 }
 

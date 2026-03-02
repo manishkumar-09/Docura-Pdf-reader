@@ -10,7 +10,9 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
 import { Progress } from "@/components/ui/progress";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-const backend_url = process.env.BACKEND_URL;
+const backendUrl =
+  process.env.NEXT_PUBLIC_BACKEND_URL ??
+  "https://docura-pdf-reader-2.onrender.com";
 import {
   Upload,
   Send,
@@ -112,13 +114,10 @@ export default function PDFReader() {
         });
       }, 200);
 
-      const res = await fetch(
-        `https://docura-pdf-reader-2.onrender.com/api/upload`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const res = await fetch(`${backendUrl}/api/upload`, {
+        method: "POST",
+        body: formData,
+      });
 
       clearInterval(progressInterval);
       setUploadProgress(100);
@@ -161,17 +160,14 @@ export default function PDFReader() {
     clearAlerts();
 
     try {
-      const res = await fetch(
-        `https://docura-pdf-reader-2.onrender.com/api/query`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            question: currentInput,
-            namespace,
-          }),
-        }
-      );
+      const res = await fetch(`${backendUrl}/api/query`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: currentInput,
+          namespace,
+        }),
+      });
 
       if (!res.ok) {
         throw new Error(`HTTP error! status: ${res.status}`);
@@ -206,7 +202,7 @@ export default function PDFReader() {
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -449,7 +445,7 @@ export default function PDFReader() {
               <Textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                onKeyPress={handleKeyPress}
+                onKeyDown={handleKeyDown}
                 placeholder={
                   pdfFile
                     ? "Ask anything about your PDF..."

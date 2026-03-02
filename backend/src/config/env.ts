@@ -6,11 +6,11 @@ config();
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production"]).default("development"),
   PORT: z.coerce.number().default(8080),
-  GEMINI_API_KEY: z.string().min(1, "COHERE_API_KEY is required"),
+  GEMINI_API_KEY: z.string().min(1, "GEMINI_API_KEY is required"),
   PINECONE_API_KEY: z.string().min(1, "PINECONE_API_KEY is required"),
   PINECONE_ENVIRONMENT: z.string().min(1, "PINECONE_ENVIRONMENT is required"),
   PINECONE_INDEX_NAME: z.string().min(1, "PINECONE_INDEX_NAME is required"),
-  PINECONE_NAMESPACE: z.string().default("my-docs"),
+  PINECONE_NAMESPACE: z.string().default("docura-768"),
   VECTOR_EXPIRATION_DAYS: z.coerce.number().default(1),
 });
 
